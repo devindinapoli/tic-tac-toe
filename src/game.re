@@ -1,4 +1,4 @@
-[%bs.raw {|require('./game.css)|}];
+[%bs.raw {|require('./game.css')|}];
 
 open SharedTypes;
 
@@ -120,6 +120,10 @@ let make = _children => {
     },
   render: ({state, reduce}) =>
     <div className="game">
-      <Board state onRestart=(reduce(_evt => Restart)) />
+      <Board
+        state
+        onRestart=(reduce(_evt => Restart))
+        onMark=(reduce(id => ClickSquare(id)))
+      />
     </div>,
 };

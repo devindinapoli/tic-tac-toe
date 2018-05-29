@@ -1,20 +1,21 @@
-type player = 
-  | Cross 
+type player =
+  | Cross
   | Circle;
 
-type field = 
+type field =
   | Empty
   | Marked(player);
 
 type row = list(field);
+
 type board = list(row);
 
-type gameState = 
+type gameState =
   | Playing(player)
   | Winner(player)
   | Draw;
 
 type state = {
-    board,
-    gameState,
+  board,
+  gameState,
 };
