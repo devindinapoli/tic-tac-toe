@@ -6,6 +6,7 @@ type action =
   | ClickSquare(string)
   | Restart;
 
+/* variant that determines who wins */
 type winner =
   | Cross
   | Circle
@@ -13,6 +14,7 @@ type winner =
 
 type winningRows = list(list(int));
 
+/* defines the winnin combinations based on which squares are clicked */
 let winningCombs = [
   [0, 1, 2],
   [3, 4, 5],
@@ -29,13 +31,13 @@ let gameEnded = board =>
     field => field == Marked(Circle) || field == Marked(Cross),
     board,
   );
-
+/* Whose turn is it? */
 let whosPlaying = (gameState: gameState) =>
   switch (gameState) {
   | Playing(Cross) => Playing(Circle)
   | _ => Playing(Cross)
   };
-
+/* determines who the winner is */
 let getWinner = (flattenBoard, coords) =>
   switch (
     List.nth(flattenBoard, List.nth(coords, 0)),
@@ -46,7 +48,7 @@ let getWinner = (flattenBoard, coords) =>
   | (Marked(Circle), Marked(Circle), Marked(Circle)) => Circle
   | (_, _, _) => NoOne
   };
-
+/* Checks after every turn to see if there's a winning combination */
 let checkGameState =
     (
       winningRows: winningRows,
@@ -77,7 +79,7 @@ let checkGameState =
     };
 
 let checkGameState3x3 = checkGameState(winningCombs);
-
+/* updates the board based on where the user clicked */
 let updateBoard = (board: board, gameState: gameState, id) =>
   board
   |> List.mapi((ind: int, row: row) =>
@@ -93,6 +95,7 @@ let updateBoard = (board: board, gameState: gameState, id) =>
           )
      );
 
+/* Shows the board as empty when a new game is started  */
 let initialState = {
   board: [
     [Empty, Empty, Empty],
@@ -102,6 +105,7 @@ let initialState = {
   gameState: Playing(Cross),
 };
 
+/* Creates the component */
 let component = ReasonReact.reducerComponent("Game");
 
 let make = _children => {
@@ -118,6 +122,7 @@ let make = _children => {
           checkGameState3x3(updatedBoard, state.board, state.gameState),
       });
     },
+  /* Renders the component */
   render: ({state, reduce}) =>
     <div className="game">
       <Board
