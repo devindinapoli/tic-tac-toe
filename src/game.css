@@ -1,6 +1,7 @@
 body {
   font: 14px "Century Gothic", Futura, sans-serif;
   margin: 20px;
+  background-color: blue;
 }
 
 .title {
@@ -8,6 +9,7 @@ body {
   font-weight: bold;
   font-size: 60px;
   margin-bottom: 20px;
+  color: red;
 }
 
 .board-row:after {
@@ -21,6 +23,7 @@ body {
   font-size: 60px;
   margin-top: 20px;
   margin-bottom: 10px;
+  color: red;
 }
 
 .square {
